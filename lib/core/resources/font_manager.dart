@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FontConstants {
-  static const String bodoniModa = 'Bodoni Moda';
-  static const String tenorSans = 'Tenor Sans';
+  static const String sen = 'Sen';
 }
 
 class FontWeightManager {

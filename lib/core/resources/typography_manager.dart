@@ -22,7 +22,7 @@ TextStyle _getTextStyle(
 
 TextStyle getRegularStyle({
   double fontSize = 12,
-  Color color = ColorManager.titleActive,
+  Color color = ColorManager.primaryText,
   double? height,
   String? fontFamily,
   double? letterSpacing = 0,
@@ -39,7 +39,7 @@ TextStyle getRegularStyle({
 
 TextStyle getMediumStyle({
   double fontSize = 12,
-  Color color = ColorManager.titleActive,
+  Color color = ColorManager.primaryText,
   double? height,
   String? fontFamily,
   double? letterSpacing = 0,
@@ -56,7 +56,7 @@ TextStyle getMediumStyle({
 
 TextStyle getSemiBoldStyle({
   double fontSize = 12,
-  Color color = ColorManager.titleActive,
+  Color color = ColorManager.primaryText,
   double? height,
   String? fontFamily,
   double? letterSpacing = 0,
@@ -73,7 +73,7 @@ TextStyle getSemiBoldStyle({
 
 TextStyle getBoldStyle({
   double fontSize = 12,
-  Color color = ColorManager.titleActive,
+  Color color = ColorManager.primaryText,
   double? height,
   String? fontFamily,
   double? letterSpacing = 0,
@@ -84,6 +84,22 @@ TextStyle getBoldStyle({
     letterSpacing,
     color,
     FontWeightManager.bold,
+    fontFamily,
+  );
+}
+TextStyle getExtraBoldStyle({
+  double fontSize = 12,
+  Color color = ColorManager.primaryText,
+  double? height,
+  String? fontFamily,
+  double? letterSpacing = 0,
+}) {
+  return _getTextStyle(
+    fontSize,
+    height,
+    letterSpacing,
+    color,
+    FontWeightManager.extraBold,
     fontFamily,
   );
 }

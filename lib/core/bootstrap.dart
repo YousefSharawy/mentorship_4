@@ -22,7 +22,7 @@ class Bootstrap extends StatelessWidget {
                 supportedLocales: cubit.localization.supportedLocales,
                 localizationsDelegates: cubit.localization.localizationsDelegates,
                 debugShowCheckedModeBanner: false,
-                routerConfig: AppNavigator.router(),
+                routerConfig: AppNavigator.router,
               );
             },
           );

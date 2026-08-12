@@ -21,8 +21,8 @@ class _SplashViewState extends State<SplashView> {
   }
    Future<void> _navigateAfterDelay() async {
     await Future.delayed(const Duration(seconds: 2));
-    if (!mounted) return; // guard against navigating after dispose
-    context.go( Routes.home);
+    if (!mounted) return;
+    context.go( Routes.onboarding);
   }
   @override
   Widget build(BuildContext context) {
