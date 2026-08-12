@@ -5,6 +5,9 @@ import 'package:mentorship_4/core/resources/color_manager.dart';
 import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/routes.dart';
 
+import '../../core/injection.dart';
+import '../../core/storage/app_storage.dart';
+
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
@@ -12,18 +15,26 @@ class SplashView extends StatefulWidget {
   State<SplashView> createState() => _SplashViewState();
 }
 
-
 class _SplashViewState extends State<SplashView> {
+    late final bool _hasSkippedOnboarding;
+
   @override
   void initState() {
     super.initState();
-   _navigateAfterDelay();
+     _hasSkippedOnboarding = getIt<AppStorage>().getSkipOnboarding() ?? false;
+    _navigateAfterDelay();
   }
-   Future<void> _navigateAfterDelay() async {
+
+  Future<void> _navigateAfterDelay() async {
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
-    context.go( Routes.onboarding);
+    if (_hasSkippedOnboarding) {
+      context.go(Routes.signup);
+    } else {
+      context.go(Routes.onboarding);
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +49,12 @@ class _SplashViewState extends State<SplashView> {
             child: Image.asset(ImageAssets.logo, width: AppWidth.s121, height: AppHeight.s60, fit: .cover),
           ),
           Spacer(),
-          Row(children: [
-            Spacer(),
-         Image.asset(ImageAssets.splashshape, width: AppWidth.s292, height: AppHeight.s295, fit: .cover),
-          ]),
+          Row(
+            children: [
+              Spacer(),
+              Image.asset(ImageAssets.splashshape, width: AppWidth.s292, height: AppHeight.s295, fit: .cover),
+            ],
+          ),
         ],
       ),
     );

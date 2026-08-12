@@ -74,6 +74,7 @@ class OnboardingView extends StatelessWidget {
                       cubit.nextPage();
                     } else {
                       context.go(Routes.signup);
+                      cubit.onboardingCompleted();
                     }
                   },
                 );

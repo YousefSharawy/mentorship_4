@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mentorship_4/core/resources/assets_manager.dart';
+import 'package:mentorship_4/core/storage/app_storage.dart';
 import 'package:mentorship_4/feature/onboarding/model/page_model.dart';
 
 part 'onboarding_state.dart';
@@ -10,7 +11,8 @@ part 'onboarding_cubit.freezed.dart';
 
 @injectable
 class OnboardingCubit extends Cubit<OnboardingState> {
-  OnboardingCubit() : super(OnboardingState.initial());
+  OnboardingCubit(this._appStorage) : super(OnboardingState.initial());
+  final AppStorage _appStorage;
 
   final PageController pageController = PageController();
   List<PageModel> onboardingPages = [
@@ -26,6 +28,10 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   void onPageChanged (int index) {
     emit(state.copyWith(currentPage: index));
   }
+  Future <void> onboardingCompleted()async{
+  await _appStorage.skipOnboarding(true);
+  }
+
   @override
   Future<void> close() async {
     pageController.dispose();
