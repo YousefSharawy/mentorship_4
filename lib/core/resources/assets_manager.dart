@@ -12,4 +12,5 @@ class ImageAssets {
   static const String onbd1 = "$imagePath/onbd1.png";
   static const String onbd2 = "$imagePath/onbd2.png";
   static const String onbd3 = "$imagePath/onbd3.png";
+  static const String signupBG = "$imagePath/signupBG.png";
 }
