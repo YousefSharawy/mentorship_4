@@ -7,7 +7,7 @@ import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/resources/typography_manager.dart';
 import 'package:mentorship_4/core/routes.dart';
 import 'package:mentorship_4/feature/onboarding/view/onboarding_page.dart';
-import 'package:mentorship_4/feature/onboarding/viewmodel/cubit/onboarding_cubit.dart';
+import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../core/widgets/custom_elevated_button.dart';
 

@@ -18,8 +18,8 @@ import 'package:mentorship_4/core/storage/app_storage.dart' as _i719;
 import 'package:mentorship_4/core/storage/storage_module.dart' as _i302;
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart'
     as _i685;
-import 'package:mentorship_4/feature/onboarding/viewmodel/cubit/onboarding_cubit.dart'
-    as _i626;
+import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart'
+    as _i517;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -43,10 +43,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i42.ApiServices(gh<_i134.DioService>()),
     );
     gh.lazySingleton<_i685.AuthCubit>(
-      () => _i685.AuthCubit(gh<_i42.ApiServices>()),
+      () => _i685.AuthCubit(gh<_i42.ApiServices>(), gh<_i719.AppStorage>()),
     );
-    gh.factory<_i626.OnboardingCubit>(
-      () => _i626.OnboardingCubit(gh<_i719.AppStorage>()),
+    gh.factory<_i517.OnboardingCubit>(
+      () => _i517.OnboardingCubit(gh<_i719.AppStorage>()),
     );
     return this;
   }

@@ -4,6 +4,7 @@ import 'package:mentorship_4/core/resources/assets_manager.dart';
 import 'package:mentorship_4/core/resources/color_manager.dart';
 import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/routes.dart';
+import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 
 import '../../core/injection.dart';
 import '../../core/storage/app_storage.dart';
@@ -16,19 +17,24 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-    late final bool _hasSkippedOnboarding;
+  late final bool _hasSkippedOnboarding;
+  late final bool _stayLoggedIn;
 
   @override
   void initState() {
     super.initState();
-     _hasSkippedOnboarding = getIt<AppStorage>().getSkipOnboarding() ?? false;
+    _hasSkippedOnboarding = getIt<AppStorage>().getSkipOnboarding() ?? false;
+    _stayLoggedIn = getIt<AppStorage>().getStayLoggedIn() ?? false;
     _navigateAfterDelay();
   }
-
-  Future<void> _navigateAfterDelay() async {
+   Future<void> _navigateAfterDelay() async {
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
-    if (_hasSkippedOnboarding) {
+     if (_hasSkippedOnboarding && _stayLoggedIn) {
+      getIt<AuthCubit>().getUserName();
+      context.go(Routes.home);
+    }
+    else if (_hasSkippedOnboarding) {
       context.go(Routes.signup);
     } else {
       context.go(Routes.onboarding);

@@ -51,7 +51,7 @@ class SignupForm extends StatelessWidget {
               isLoading: isLoading,
               title: "Sign Up",
               onPress: () {
-                context.read<AuthCubit>().signUp(emailController.text, passwordController.text);
+                context.read<AuthCubit>().signUp(emailController.text, passwordController.text,nameController.text);
               },
             ),
             SizedBox(height: AppHeight.s30),

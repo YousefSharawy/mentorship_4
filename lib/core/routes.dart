@@ -6,7 +6,7 @@ import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dar
 import 'package:mentorship_4/feature/auth/signup/view/signup_view.dart';
 import 'package:mentorship_4/feature/home/view/home_view.dart';
 import 'package:mentorship_4/feature/onboarding/view/onboarding_view.dart';
-import 'package:mentorship_4/feature/onboarding/viewmodel/cubit/onboarding_cubit.dart';
+import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart';
 import 'package:mentorship_4/feature/splash/splash_view.dart';
 
 class Routes {
@@ -28,7 +28,13 @@ class AppNavigator {
         builder: (context, state) =>
             BlocProvider(create: (context) => getIt<OnboardingCubit>(), child: OnboardingView()),
       ),
-      GoRoute(path: Routes.home, builder: (context, state) => HomeView()),
+      GoRoute(
+        path: Routes.home,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [BlocProvider(create: (_) => getIt<AuthCubit>())],
+          child: HomeView(),
+        ),
+      ),
       GoRoute(
         path: Routes.signup,
         builder: (context, state) => BlocProvider(create: (context) => getIt<AuthCubit>(), child: SignupView()),
