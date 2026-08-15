@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/resources/assets_manager.dart';
 import 'package:mentorship_4/core/resources/color_manager.dart';
 import 'package:mentorship_4/core/resources/font_manager.dart';
 import 'package:mentorship_4/core/resources/typography_manager.dart';
+import 'package:mentorship_4/core/routes.dart';
 import 'package:mentorship_4/core/widgets/custom_icon_button.dart';
+import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/auth/signup/view/widgets/signup_form.dart';
 
 import '../../../../core/resources/spacing_values_manager.dart';
@@ -60,14 +64,34 @@ class SignupView extends StatelessWidget {
               Expanded(
                 child: Container(
                   width: 1.sw,
-                  decoration:BoxDecoration(
-                  color: ColorManager.white,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(AppRadius.s12),topRight: Radius.circular(AppRadius.s12)),
-                  ) ,
-                  child: SignupForm(),
-                
+                  decoration: BoxDecoration(
+                    color: ColorManager.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(AppRadius.s12),
+                      topRight: Radius.circular(AppRadius.s12),
+                    ),
+                  ),
+                  child: BlocConsumer<AuthCubit, AuthState>(
+                    builder: (BuildContext context, AuthState state) {
+                      return SignupForm(
+                        isLoading: state.maybeWhen(
+                          signupLoading: () => true,
+                          orElse: ()=>false),
+                      );
+                    },
+                    listener: (BuildContext context, AuthState state) {
+                      state.whenOrNull(
+                        signupSuccess: (user) => context.go(Routes.home),
+                        signupError: (message) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(message ?? 'Sign-up failed')));
+                        },
+                      );
+                    },
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/injection.dart';
+import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/auth/signup/view/signup_view.dart';
 import 'package:mentorship_4/feature/home/view/home_view.dart';
 import 'package:mentorship_4/feature/onboarding/view/onboarding_view.dart';
@@ -22,11 +23,16 @@ class AppNavigator {
     initialLocation: Routes.splash,
     routes: <RouteBase>[
       GoRoute(path: Routes.splash, builder: (context, state) => SplashView()),
-      GoRoute(path: Routes.onboarding, builder: (context, state) => BlocProvider(
-        create: (context) => getIt<OnboardingCubit>(),
-        child: OnboardingView())),
+      GoRoute(
+        path: Routes.onboarding,
+        builder: (context, state) =>
+            BlocProvider(create: (context) => getIt<OnboardingCubit>(), child: OnboardingView()),
+      ),
       GoRoute(path: Routes.home, builder: (context, state) => HomeView()),
-      GoRoute(path: Routes.signup, builder: (context, state) => SignupView()),
+      GoRoute(
+        path: Routes.signup,
+        builder: (context, state) => BlocProvider(create: (context) => getIt<AuthCubit>(), child: SignupView()),
+      ),
     ],
     navigatorKey: rootNK,
     // debugLogDiagnostics: true,
