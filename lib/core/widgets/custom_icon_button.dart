@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mentorship_4/core/resources/color_manager.dart';
 
 import '../resources/spacing_values_manager.dart';
 
 class CustomIconButton extends StatelessWidget {
-  const CustomIconButton({super.key, required this.ontap, required this.backgroundColor});
+   const CustomIconButton({this.icon = const Icon(Icons.chevron_left),super.key, required this.ontap, required this.backgroundColor});
  final VoidCallback ontap;
  final Color backgroundColor;
-
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +15,9 @@ class CustomIconButton extends StatelessWidget {
       height: AppHeight.s45,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: ColorManager.white,
+        color: backgroundColor,
       ),
-      child: IconButton(onPressed: (){}, icon: Icon(Icons.chevron_left ),iconSize: AppSize.s20,),
+      child: IconButton(onPressed: (){}, icon: icon,iconSize: AppSize.s20,),
     );
   }
 }

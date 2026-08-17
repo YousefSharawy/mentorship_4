@@ -2,7 +2,7 @@ const String iconPath = "assets/icons";
 const String imagePath = "assets/images";
 
 class IconAssets {
-  // static const String openfashion = "$iconPath/openfashion.png";
+  static const String shoppingbag = "$iconPath/shoppingbag.png";
 }
 
 class ImageAssets {

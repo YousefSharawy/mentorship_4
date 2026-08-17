@@ -9,6 +9,8 @@ class ColorManager {
   static const warmPrimary = Color(0xffFFE1CE);
   static const navyBlue = Color(0xff121223);
   static const aliceBlue = Color(0xffF0F5FA);
+  static const gray = Color(0xffECF0F4);
+  static const lightGray = Color(0xffF6F6F6);
     static const error = Color(0xffE53935);
 
 
