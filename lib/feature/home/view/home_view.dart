@@ -7,6 +7,7 @@ import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/resources/typography_manager.dart';
 import 'package:mentorship_4/core/widgets/custom_text_form_field.dart';
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
+import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart';
 import 'package:mentorship_4/feature/home/view/widgets/custom_header_row.dart';
 import 'package:mentorship_4/feature/home/view/widgets/home_main_row_header.dart';
 import 'package:mentorship_4/feature/home/view/widgets/home_resturant_container.dart';
@@ -61,12 +62,25 @@ class HomeView extends StatelessWidget {
               SizedBox(height: AppHeight.s32),
               CustomHeaderRow(header: 'Open Restaurants', onTap: () {}),
               SizedBox(height: AppHeight.s20),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (_, index) {
-                  return HomeResturantContainer();
+              BlocBuilder<HomeCubit, HomeState>(
+                builder: (BuildContext context, HomeState state) {
+                  return state.when(
+                    initial: () => const SizedBox.shrink(),
+                    allResturantsInitial: () => const SizedBox.shrink(),
+                    allResturantsLoading: () => const Center(child: CircularProgressIndicator()),
+                    allResturantsSuccess: (resturants) => ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 10,
+                      itemBuilder: (_, index) {
+                        return HomeResturantContainer(
+                          returantName: resturants[index].restaurantName,
+                          address: resturants[index].address,
+                        );
+                      },
+                    ),
+                    allResturantsError: (message) => Text(message ?? 'Something went wrong'),
+                  );
                 },
               ),
             ],

@@ -40,6 +40,7 @@ class SignupForm extends StatelessWidget {
                 if (value != passwordController.text) {
                   return ("the password is mismatched");
                 }
+                return null;
               },
               controller: repasswordController,
               label: "Re-Type Password",

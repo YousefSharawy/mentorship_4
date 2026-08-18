@@ -6,7 +6,9 @@ import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/resources/typography_manager.dart';
 
 class HomeResturantContainer extends StatelessWidget {
-  const HomeResturantContainer({super.key});
+  const HomeResturantContainer({super.key, required this.returantName, required this.address});
+  final String returantName ; 
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +20,13 @@ class HomeResturantContainer extends StatelessWidget {
           child: Image.asset(ImageAssets.onbd3, width: AppWidth.s327, height: AppHeight.s137, fit: .fill),
         ),
         SizedBox(height: AppHeight.s8),
-        Text("rose garden restaurant",style:getRegularStyle(
+        Text(returantName,style:getRegularStyle(
           color: ColorManager.primaryText,
           fontFamily: FontConstants.sen,
           fontSize: FontSize.s20,
         ) ,),
         SizedBox(height: AppHeight.s5),
-        Text("Burger - Chiken - Riche - Wings "),
+        Text(address),
         SizedBox(height: AppHeight.s28,),
       ],
     );

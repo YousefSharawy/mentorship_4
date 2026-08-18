@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/injection.dart';
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/auth/signup/view/signup_view.dart';
+import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart';
 import 'package:mentorship_4/feature/home/view/home_view.dart';
 import 'package:mentorship_4/feature/onboarding/view/onboarding_view.dart';
 import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart';
@@ -31,7 +32,7 @@ class AppNavigator {
       GoRoute(
         path: Routes.home,
         builder: (context, state) => MultiBlocProvider(
-          providers: [BlocProvider(create: (_) => getIt<AuthCubit>())],
+          providers: [BlocProvider(create: (_) => getIt<AuthCubit>()),BlocProvider(create: (_) => getIt<HomeCubit>()..getALlResturants())],
           child: HomeView(),
         ),
       ),

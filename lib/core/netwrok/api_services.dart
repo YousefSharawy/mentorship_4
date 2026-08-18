@@ -5,6 +5,7 @@ import 'package:mentorship_4/core/netwrok/dio_service.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../feature/auth/signup/model/user_model.dart';
+import '../../feature/home/model/resturant_model.dart';
 part 'api_services.g.dart';
 @RestApi()
 @injectable
@@ -12,8 +13,9 @@ abstract class ApiServices {
 @factoryMethod
 factory ApiServices(DioService client) => _ApiServices(client.dio);
 
-
-
 @POST(ApiConstants.signUpEndpoint)
 Future<UserModel> register (@Body() Map<String,dynamic>json);
+
+@GET(ApiConstants.getAllResturantsEndpoint)
+Future<List<ResturantModel>> getAllResturants ();
 }
