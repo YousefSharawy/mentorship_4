@@ -55,6 +55,9 @@ class HomeView extends StatelessWidget {
               ),
               SizedBox(height: AppHeight.s16),
               CustomTextFormField(
+                onChanged: (value) {
+                  
+                },
                 filledColor: ColorManager.lightGray,
                 hint: "Search dishes, restaurants",
                 prefixIcon: Icons.search,
@@ -64,6 +67,7 @@ class HomeView extends StatelessWidget {
               SizedBox(height: AppHeight.s20),
               BlocBuilder<HomeCubit, HomeState>(
                 builder: (BuildContext context, HomeState state) {
+                  final cubit = getIt<HomeCubit>();
                   return state.when(
                     initial: () => const SizedBox.shrink(),
                     allResturantsInitial: () => const SizedBox.shrink(),
@@ -71,11 +75,12 @@ class HomeView extends StatelessWidget {
                     allResturantsSuccess: (resturants) => ListView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 10,
+                      itemCount: 3,
                       itemBuilder: (_, index) {
                         return HomeResturantContainer(
                           returantName: resturants[index].restaurantName,
                           address: resturants[index].address,
+                          image: cubit.images[index],
                         );
                       },
                     ),
