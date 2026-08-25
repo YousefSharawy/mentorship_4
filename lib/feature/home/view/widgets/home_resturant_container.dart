@@ -7,7 +7,7 @@ import 'package:mentorship_4/core/resources/typography_manager.dart';
 class HomeResturantContainer extends StatelessWidget {
   const HomeResturantContainer({super.key, required this.returantName, required this.address, required this.image});
   final String returantName;
-  final String address;
+  final String? address;
   final String image;
 
   @override
@@ -42,7 +42,7 @@ class HomeResturantContainer extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppHeight.s5),
-        Text(address),
+        address==null? SizedBox.shrink():Text(address!),
         SizedBox(height: AppHeight.s28),
       ],
     );

@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../home/controller/cubit/home_cubit.dart';
-import '../../home/view/widgets/home_resturant_container.dart';
+import 'package:mentorship_4/core/injection.dart';
+import 'package:mentorship_4/feature/home/view/widgets/home_resturant_container.dart';
+import 'package:mentorship_4/feature/search/controller/cubit/search_cubit.dart';
+import 'package:mentorship_4/feature/search/view/search_body.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        return BlocBuilder<HomeCubit, HomeState>(
-          builder: (BuildContext context, HomeState state) {
-            return state.when(
-              initial: () => const SizedBox.shrink(),
-              allResturantsInitial: () => const SizedBox.shrink(),
-              allResturantsLoading: () => const Center(child: CircularProgressIndicator()),
-              allResturantsSuccess: (resturants) => ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (_, index) {
-                  return HomeResturantContainer(
-                    returantName: resturants[index].restaurantName,
-                    address: resturants[index].address,
-                    image: "",
-                  );
-                },
-              ),
-              allResturantsError: (message) => Text(message ?? 'Something went wrong'),
-            );
-          },
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        final keywords = getIt<SearchCubit>().keyWords;
+        return state.maybeWhen(
+          searchInitial: () => SearchBody(keywords: keywords),
+          searchLoading: () => CircularProgressIndicator(),
+          searchSuccess: (items) => ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: items.length,
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              return HomeResturantContainer(
+                returantName: items[index].restaurantName,
+                image: items[index].imageUrl,
+                address: null,
+              );
+            },
+          ),
+          searchError: (error) => Text("data"),
+          orElse: () => SearchBody(keywords: keywords),
         );
       },
     );

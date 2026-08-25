@@ -22,9 +22,11 @@ class CustomTextFormField extends StatefulWidget {
     this.onChanged,
     this.keyboardType,
     this.filledColor,
+    this.focusNode,
     this.textAlign = TextAlign.left,
     this.onFieldSubmitted,
   });
+  final FocusNode? focusNode;
   final String? hint;
   final String? label;
   final String? Function(String?)? validator;
@@ -72,6 +74,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           SizedBox(height: AppHeight.s8),
         ],
         TextFormField(
+          focusNode: widget.focusNode,
           onFieldSubmitted: widget.onFieldSubmitted,
           maxLines: widget.maxLines,
           expands: false,

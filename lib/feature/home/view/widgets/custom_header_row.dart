@@ -25,20 +25,18 @@ class CustomHeaderRow extends StatelessWidget {
         InkWell(
           borderRadius: BorderRadius.circular(AppRadius.s12),
           onTap: onTap,
-          child: Center(
-            child: Row(
-              children: [
-                Text(
-                  "See All",
-                  style: getRegularStyle(
-                    fontFamily: FontConstants.sen,
-                    fontSize: FontSize.s16,
-                    color: ColorManager.primaryText,
-                  ),
+          child: Row(
+            children: [
+              Text(
+                "See All",
+                style: getRegularStyle(
+                  fontFamily: FontConstants.sen,
+                  fontSize: FontSize.s16,
+                  color: ColorManager.primaryText,
                 ),
-                Icon(Icons.chevron_right),
-              ],
-            ),
+              ),
+              Icon(Icons.chevron_right),
+            ],
           ),
         ),
       ],

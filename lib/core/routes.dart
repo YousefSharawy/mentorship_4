@@ -33,7 +33,11 @@ class AppNavigator {
       GoRoute(
         path: Routes.home,
         builder: (context, state) => MultiBlocProvider(
-          providers: [BlocProvider(create: (_) => getIt<AuthCubit>()),BlocProvider(create: (_) => getIt<HomeCubit>()..getALlResturants()),BlocProvider(create: (_) => getIt<SearchCubit>())],
+          providers: [
+            BlocProvider(create: (_) => getIt<AuthCubit>()),
+            BlocProvider(create: (_) => getIt<HomeCubit>()..getALlResturants()),
+            BlocProvider(create: (_) => getIt<SearchCubit>()..getSavedKeywords()),
+          ],
           child: HomeView(),
         ),
       ),

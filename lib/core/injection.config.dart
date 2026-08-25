@@ -22,6 +22,8 @@ import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart'
     as _i1047;
 import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart'
     as _i517;
+import 'package:mentorship_4/feature/search/controller/cubit/search_cubit.dart'
+    as _i798;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -49,6 +51,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1047.HomeCubit>(
       () => _i1047.HomeCubit(gh<_i42.ApiServices>()),
+    );
+    gh.lazySingleton<_i798.SearchCubit>(
+      () => _i798.SearchCubit(gh<_i42.ApiServices>(), gh<_i719.AppStorage>()),
     );
     gh.factory<_i517.OnboardingCubit>(
       () => _i517.OnboardingCubit(gh<_i719.AppStorage>()),
