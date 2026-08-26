@@ -9,22 +9,27 @@ class RecentKeywordsContainer extends StatelessWidget {
   final String keyword;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsetsDirectional.only(end: AppWidth.s10),
-      width: AppWidth.s89,
-      height: AppHeight.s46,
-      decoration: BoxDecoration(
-        border: Border.all(color: ColorManager.lightGray),
-        borderRadius: BorderRadius.circular(AppRadius.s33),
-      ),
-      child: Center(
-        child: Text(
-          keyword,
-          style: getRegularStyle(
-            letterSpacing: -0.33,
-            fontFamily: FontConstants.sen,
-            fontSize: FontSize.s16,
-            color: ColorManager.primaryText,
+    return InkWell(
+      onTap: () {
+        
+      },
+      child: Container(
+        margin: EdgeInsetsDirectional.only(end: AppWidth.s10),
+        width: AppWidth.s89,
+        height: AppHeight.s46,
+        decoration: BoxDecoration(
+          border: Border.all(color: ColorManager.lightGray),
+          borderRadius: BorderRadius.circular(AppRadius.s33),
+        ),
+        child: Center(
+          child: Text(
+            keyword,
+            style: getRegularStyle(
+              letterSpacing: -0.33,
+              fontFamily: FontConstants.sen,
+              fontSize: FontSize.s16,
+              color: ColorManager.primaryText,
+            ),
           ),
         ),
       ),
