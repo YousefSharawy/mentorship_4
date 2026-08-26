@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mentorship_4/core/netwrok/api_services.dart';
@@ -16,6 +17,7 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this._apiServices, this._appStorage) : super(SearchState.initial());
   final ApiServices _apiServices;
   final AppStorage _appStorage;
+  final TextEditingController searchEditingController = TextEditingController();
   Timer? _debounce;
   List<String> keyWords = [];
 

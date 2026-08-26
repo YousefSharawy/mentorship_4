@@ -74,6 +74,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           SizedBox(height: AppHeight.s8),
         ],
         TextFormField(
+          
           focusNode: widget.focusNode,
           onFieldSubmitted: widget.onFieldSubmitted,
           maxLines: widget.maxLines,

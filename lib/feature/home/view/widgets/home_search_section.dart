@@ -36,9 +36,11 @@ class _HomeSearchSectionState extends State<HomeSearchSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomTextFormField(
+          controller: getIt<SearchCubit>().searchEditingController,
           onChanged: (value) {
             getIt<SearchCubit>().onQuerryChanged(value);
           },
+          keyboardType: .text,
           focusNode: focusNode,
           filledColor: ColorManager.lightGray,
           hint: "Search dishes, restaurants",
