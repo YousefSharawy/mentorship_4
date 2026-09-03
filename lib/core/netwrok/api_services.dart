@@ -16,9 +16,10 @@ factory ApiServices(DioService client) => _ApiServices(client.dio);
 
 @POST(ApiConstants.signUpEndpoint)
 Future<UserModel> register (@Body() Map<String,dynamic>json);
-
 @GET(ApiConstants.getAllResturantsEndpoint)
 Future<List<ResturantModel>> getAllResturants ();
 @GET(ApiConstants.searchItemsEndpoint)
 Future<List<ItemModel>> searchOnItem (@Query('ItemName') String? itemName,);
+@GET(ApiConstants.getAllItems)
+Future<List<ItemModel>> getAllItems();
 }

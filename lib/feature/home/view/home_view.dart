@@ -5,7 +5,6 @@ import 'package:mentorship_4/core/resources/color_manager.dart';
 import 'package:mentorship_4/core/resources/font_manager.dart';
 import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/resources/typography_manager.dart';
-import 'package:mentorship_4/core/widgets/custom_text_form_field.dart';
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/home/view/widgets/home_main_row_header.dart';
 import 'package:mentorship_4/feature/home/view/widgets/home_search_section.dart';

@@ -13,8 +13,9 @@ class SearchView extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         final keywords = getIt<SearchCubit>().keyWords;
+        final items = getIt<SearchCubit>().itemModels;
         return state.maybeWhen(
-          searchInitial: () => SearchBody(keywords: keywords),
+          searchInitial: () => SearchBody(keywords: keywords,items: items,),
           searchLoading: () => CircularProgressIndicator(),
           searchSuccess: (items) => ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -29,7 +30,7 @@ class SearchView extends StatelessWidget {
             },
           ),
           searchError: (error) => Text("data"),
-          orElse: () => SearchBody(keywords: keywords),
+          orElse: () => SearchBody(keywords: keywords,items: items,),
         );
       },
     );

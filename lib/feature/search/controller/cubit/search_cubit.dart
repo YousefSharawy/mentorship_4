@@ -20,6 +20,7 @@ class SearchCubit extends Cubit<SearchState> {
   final TextEditingController searchEditingController = TextEditingController();
   Timer? _debounce;
   List<String> keyWords = [];
+  List<ItemModel> itemModels = [];
 
   void onQuerryChanged(String query) {
     _debounce?.cancel();
@@ -42,6 +43,19 @@ class SearchCubit extends Cubit<SearchState> {
       return result;
     } catch (e) {
       emit(SearchState.searchError(e.toString()));
+      rethrow;
+    }
+  }
+
+  Future<List<ItemModel>> getAllItems() async {
+    try {
+      emit(SearchState.getAllItemsLoading());
+      final items = await _apiServices.getAllItems();
+      itemModels = items;
+      emit(SearchState.getAllItemsSucess(items));
+      return items;
+    } catch (e) {
+      emit(SearchState.getAllItemsError(e.toString()));
       rethrow;
     }
   }
