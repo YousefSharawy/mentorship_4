@@ -27,7 +27,6 @@ class SuggestedRestrauntsRow extends StatelessWidget {
           ],
         ),
         Divider(color: ColorManager.gray,),
-
       ],
     );
   }

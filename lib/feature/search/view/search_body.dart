@@ -52,6 +52,7 @@ class SearchBody extends StatelessWidget {
           ),
         ),
         ListView.builder(
+          padding: EdgeInsets.only(top: AppHeight.s20),
           shrinkWrap: true,
           itemCount: 3,
           physics: NeverScrollableScrollPhysics(),
@@ -67,15 +68,14 @@ class SearchBody extends StatelessWidget {
             color: ColorManager.primaryText,
           ),
         ),
-                SizedBox(height: AppHeight.s27),
-                
+        SizedBox(height: AppHeight.s27),
 
         SizedBox(
           height: AppHeight.s145,
           child: ListView.builder(
             scrollDirection: .horizontal,
             shrinkWrap: true,
-            itemCount: 4,
+            itemCount: items.length,
             itemBuilder: (_, index) {
               return PopularFastFoodContainer(
                 image: items[index].imageUrl,
@@ -85,7 +85,7 @@ class SearchBody extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(height: AppHeight.s20,)
+        SizedBox(height: AppHeight.s20),
       ],
     );
   }

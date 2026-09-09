@@ -5,6 +5,8 @@ import 'package:mentorship_4/feature/home/view/widgets/home_resturant_container.
 import 'package:mentorship_4/feature/search/controller/cubit/search_cubit.dart';
 import 'package:mentorship_4/feature/search/view/search_body.dart';
 
+import '../../../core/resources/spacing_values_manager.dart';
+
 class SearchView extends StatelessWidget {
   const SearchView({super.key});
 
@@ -19,6 +21,7 @@ class SearchView extends StatelessWidget {
           searchLoading: () => CircularProgressIndicator(),
           searchSuccess: (items) => ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.only(top: AppHeight.s20),
             itemCount: items.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {

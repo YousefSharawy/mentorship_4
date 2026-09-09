@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/feature/home/view/widgets/home_resturant_container.dart';
 
 import '../../../../core/injection.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
-import '../../../../core/resources/spacing_values_manager.dart';
 import '../../../../core/resources/typography_manager.dart';
 import '../../controller/cubit/home_cubit.dart';
 
@@ -25,7 +25,6 @@ class HomeBody extends StatelessWidget {
             color: ColorManager.primaryText,
           ),
         ),
-              SizedBox(height: AppHeight.s20),
               BlocBuilder<HomeCubit, HomeState>(
                 builder: (BuildContext context, HomeState state) {
                   final cubit = getIt<HomeCubit>();
@@ -34,6 +33,7 @@ class HomeBody extends StatelessWidget {
                     allResturantsInitial: () => const SizedBox.shrink(),
                     allResturantsLoading: () => const Center(child: CircularProgressIndicator()),
                     allResturantsSuccess: (resturants) => ListView.builder(
+                      padding: EdgeInsets.only(top: AppHeight.s20),
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 3,
