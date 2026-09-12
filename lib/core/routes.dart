@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/injection.dart';
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/auth/signup/view/signup_view.dart';
+import 'package:mentorship_4/feature/detials/food/food_details_view.dart';
+import 'package:mentorship_4/feature/detials/resturant/restaurants_details_view.dart';
 import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart';
 import 'package:mentorship_4/feature/home/view/home_view.dart';
 import 'package:mentorship_4/feature/onboarding/view/onboarding_view.dart';
@@ -16,6 +18,8 @@ class Routes {
   static const String onboarding = '/onboarding';
   static const String home = '/home';
   static const String signup = '/signup';
+  static const String foodDetails = '/foodDetails';
+  static const String restaurantDetails = '/restaurantDetails';
 }
 
 class AppNavigator {
@@ -36,7 +40,11 @@ class AppNavigator {
           providers: [
             BlocProvider(create: (_) => getIt<AuthCubit>()),
             BlocProvider(create: (_) => getIt<HomeCubit>()..getALlResturants()),
-            BlocProvider(create: (_) => getIt<SearchCubit>()..getSavedKeywords()..getAllItems()),
+            BlocProvider(
+              create: (_) => getIt<SearchCubit>()
+                ..getSavedKeywords()
+                ..getAllItems(),
+            ),
           ],
           child: HomeView(),
         ),
@@ -44,6 +52,19 @@ class AppNavigator {
       GoRoute(
         path: Routes.signup,
         builder: (context, state) => BlocProvider(create: (context) => getIt<AuthCubit>(), child: SignupView()),
+      ),
+      GoRoute(
+        path: Routes.restaurantDetails,
+        builder: (context, state) {
+          final args = state.extra as ({String name, String? address, String image});
+          return RestaurantsDetailsView(image: args.image, name: args.name, address: args.address ?? "");
+        },
+      ),
+      GoRoute(
+        path: Routes.foodDetails,
+        builder: (context, state) {
+          return FoodDetailsView();
+        },
       ),
     ],
     navigatorKey: rootNK,
