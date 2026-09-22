@@ -7,10 +7,11 @@ import 'package:mentorship_4/core/resources/typography_manager.dart';
 import 'package:mentorship_4/core/routes.dart';
 
 class HomeResturantContainer extends StatelessWidget {
-  const HomeResturantContainer({super.key, required this.returantName, required this.address, required this.image});
+  const HomeResturantContainer({super.key, required this.returantName, required this.address, required this.image, required this.id});
   final String returantName;
   final String? address;
   final String image;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class HomeResturantContainer extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            context.push(Routes.restaurantDetails, extra: (name: returantName, address: address, image: image));
+            context.push(Routes.restaurantDetails, extra: (id: id,name: returantName, address: address, image: image));
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(AppRadius.s16),

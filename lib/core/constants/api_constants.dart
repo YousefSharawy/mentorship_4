@@ -5,4 +5,5 @@ static const signUpEndpoint  = '/User/register';
 static const getAllResturantsEndpoint  = '/Restaurant'; 
 static const searchItemsEndpoint  = '/Restaurant/items'; 
 static const getAllItems  = '/Restaurant/items'; 
+static const getMenuByRestaurantID  ='/Restaurant/{id}/menu'; 
 }

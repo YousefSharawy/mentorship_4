@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
+import 'package:mentorship_4/feature/detials/food/controller/cubit/food_cubit.dart';
+import 'package:mentorship_4/feature/detials/resturant/custom_menu_item_container.dart';
 import '../../../core/resources/color_manager.dart';
 import '../../../core/resources/font_manager.dart';
 import '../../../core/resources/typography_manager.dart';
 import '../../../core/widgets/custom_icon_button.dart';
 
 class RestaurantsDetailsView extends StatelessWidget {
-  const RestaurantsDetailsView({super.key, required this.image, required this.name, required this.address});
+  const RestaurantsDetailsView({super.key, required this.image, required this.name, required this.address, required this.id});
   final String image;
   final String name;
   final String address;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: AppWidth.s24),
         child: Column(
@@ -40,7 +45,6 @@ class RestaurantsDetailsView extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                CustomIconButton(icon: Icon(Icons.more_horiz), ontap: () {}, backgroundColor: ColorManager.gray),
               ],
             ),
             SizedBox(height: AppHeight.s24),
@@ -75,6 +79,27 @@ class RestaurantsDetailsView extends StatelessWidget {
             Text(
               address,
               style: getRegularStyle(fontFamily: FontConstants.sen, fontSize: FontSize.s14),
+            ),
+            SizedBox(height: AppHeight.s16,),
+            Expanded(
+              child: BlocBuilder<FoodCubit,FoodState>(
+                builder: (context, state) {
+                  return state.when(
+                    initial: () => const SizedBox.shrink(),
+                    menuInitial: () => const SizedBox.shrink(),
+                    menuLoading: () => Center(child: CircularProgressIndicator()),
+                    menuError: (message) => Text(message ?? "Can't get menu" ),
+                    menuSuccess: (menuItems) => GridView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: menuItems.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: AppWidth.s21,mainAxisSpacing: AppHeight.s17),
+                      itemBuilder: (_, index) {
+                        return CustomMenuItemContainer(itemModel: menuItems[index]);
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),

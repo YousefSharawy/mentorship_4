@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:mentorship_4/core/cubit/locale_cubit.dart' as _i929;
@@ -18,6 +19,8 @@ import 'package:mentorship_4/core/storage/app_storage.dart' as _i719;
 import 'package:mentorship_4/core/storage/storage_module.dart' as _i302;
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart'
     as _i685;
+import 'package:mentorship_4/feature/detials/food/controller/cubit/food_cubit.dart'
+    as _i1073;
 import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart'
     as _i1047;
 import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart'
@@ -51,6 +54,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1047.HomeCubit>(
       () => _i1047.HomeCubit(gh<_i42.ApiServices>()),
+    );
+    gh.factory<_i1073.FoodCubit>(
+      () => _i1073.FoodCubit(gh<_i42.ApiServices>()),
     );
     gh.lazySingleton<_i798.SearchCubit>(
       () => _i798.SearchCubit(gh<_i42.ApiServices>(), gh<_i719.AppStorage>()),

@@ -4,13 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/injection.dart';
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/auth/signup/view/signup_view.dart';
-import 'package:mentorship_4/feature/detials/food/food_details_view.dart';
+import 'package:mentorship_4/feature/detials/food/controller/cubit/food_cubit.dart';
+import 'package:mentorship_4/feature/detials/food/presentation/view/food_details_view.dart';
 import 'package:mentorship_4/feature/detials/resturant/restaurants_details_view.dart';
 import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart';
 import 'package:mentorship_4/feature/home/view/home_view.dart';
 import 'package:mentorship_4/feature/onboarding/view/onboarding_view.dart';
 import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart';
 import 'package:mentorship_4/feature/search/controller/cubit/search_cubit.dart';
+import 'package:mentorship_4/feature/search/model/item_model.dart';
 import 'package:mentorship_4/feature/splash/splash_view.dart';
 
 class Routes {
@@ -56,14 +58,17 @@ class AppNavigator {
       GoRoute(
         path: Routes.restaurantDetails,
         builder: (context, state) {
-          final args = state.extra as ({String name, String? address, String image});
-          return RestaurantsDetailsView(image: args.image, name: args.name, address: args.address ?? "");
+          final args = state.extra as ({int id, String name, String? address, String image});
+          return BlocProvider(
+            create: (context)=> getIt<FoodCubit>()..getReturantMenuItemsByID(args.id),
+            child: RestaurantsDetailsView(address: args.address ?? "",id:args.id,image: args.image, name: args.name));
         },
       ),
       GoRoute(
         path: Routes.foodDetails,
         builder: (context, state) {
-          return FoodDetailsView();
+          final itemModel = state.extra as ItemModel;
+          return FoodDetailsView(itemModel: itemModel);
         },
       ),
     ],

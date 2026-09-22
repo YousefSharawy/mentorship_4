@@ -7,6 +7,7 @@ abstract class ItemModel with _$ItemModel {
   factory ItemModel({
     required int itemID,
     required String itemName,
+    required String itemDescription,
     required double itemPrice,
     required String restaurantName,
     required int restaurantID,

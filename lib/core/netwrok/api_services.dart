@@ -22,4 +22,6 @@ Future<List<ResturantModel>> getAllResturants ();
 Future<List<ItemModel>> searchOnItem (@Query('ItemName') String? itemName,);
 @GET(ApiConstants.getAllItems)
 Future<List<ItemModel>> getAllItems();
+@GET(ApiConstants.getMenuByRestaurantID)
+Future<List<ItemModel>> getMenu(@Path('id') int id);
 }

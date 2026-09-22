@@ -26,6 +26,7 @@ class SearchView extends StatelessWidget {
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) {
               return HomeResturantContainer(
+                id: items[index].itemID,
                 returantName: items[index].restaurantName,
                 image: items[index].imageUrl,
                 address: null,

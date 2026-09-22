@@ -13,7 +13,9 @@ class HomeMainRowHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [CustomIconButton(ontap: () {}, backgroundColor: ColorManager.gray ),
+      children: [CustomIconButton(
+        icon: Icon(Icons.menu),
+        ontap: () {}, backgroundColor: ColorManager.gray ),
       SizedBox(width: AppWidth.s18,),
       Column(
         crossAxisAlignment: .start,

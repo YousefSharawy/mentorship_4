@@ -78,9 +78,7 @@ class SearchBody extends StatelessWidget {
             itemCount: items.length,
             itemBuilder: (_, index) {
               return PopularFastFoodContainer(
-                image: items[index].imageUrl,
-                name: items[index].itemName,
-                label: items[index].restaurantName,
+                itemModel: items[index],
               );
             },
           ),
