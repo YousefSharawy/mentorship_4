@@ -12,14 +12,14 @@ class FoodCubit extends Cubit<FoodState> {
   FoodCubit(this._apiServices) : super(FoodState.initial());
   final ApiServices _apiServices;
   List<ItemModel> menuItems = [];
-
+  
   Future<void> getReturantMenuItemsByID(int id) async {
     emit(FoodState.menuInitial());
     try {
       emit(FoodState.menuLoading());
-       final menuItems = await _apiServices.getMenu(id);
-    this.menuItems = menuItems;
-    emit(FoodState.menuSuccess(menuItems));
+      final menuItems = await _apiServices.getMenu(id);
+      this.menuItems = menuItems;
+      emit(FoodState.menuSuccess(menuItems));
     } catch (e) {
       emit(FoodState.menuError(e.toString()));
     }

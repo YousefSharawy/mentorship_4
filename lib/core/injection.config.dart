@@ -19,6 +19,8 @@ import 'package:mentorship_4/core/storage/app_storage.dart' as _i719;
 import 'package:mentorship_4/core/storage/storage_module.dart' as _i302;
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart'
     as _i685;
+import 'package:mentorship_4/feature/cart/controller/cubit/cart_cubit.dart'
+    as _i430;
 import 'package:mentorship_4/feature/detials/food/controller/cubit/food_cubit.dart'
     as _i1073;
 import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart'
@@ -60,6 +62,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i798.SearchCubit>(
       () => _i798.SearchCubit(gh<_i42.ApiServices>(), gh<_i719.AppStorage>()),
+    );
+    gh.factory<_i430.CartCubit>(
+      () => _i430.CartCubit(gh<_i42.ApiServices>(), gh<_i719.AppStorage>()),
     );
     gh.factory<_i517.OnboardingCubit>(
       () => _i517.OnboardingCubit(gh<_i719.AppStorage>()),

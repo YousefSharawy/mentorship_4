@@ -14,6 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
   final ApiServices apiServices;
   UserModel? userModel;
   String? userName;
+  String? userCode;
   final AppStorage appStorage;
   Future<UserModel> signUp(String userEmail, String password, String name) async {
     emit(AuthState.signupInitial());
@@ -22,7 +23,8 @@ class AuthCubit extends Cubit<AuthState> {
       final result = await apiServices.register({'userEmail': userEmail, 'password': password});
       userModel = result;
       await appStorage.saveUserName(name);
-       getUserName();
+      await appStorage.saveUserCode(userModel!.usercode);
+      getUser();
       await appStorage.stayLoggedIn(true);
       emit(AuthState.signupSuccess(result));
       return result;
@@ -32,7 +34,8 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> getUserName() async {
+  Future<void> getUser() async {
     userName = appStorage.getUserName();
+    userCode = appStorage.getUserCode();
   }
 }

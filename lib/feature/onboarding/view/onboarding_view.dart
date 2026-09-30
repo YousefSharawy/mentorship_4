@@ -73,8 +73,8 @@ class OnboardingView extends StatelessWidget {
                     if (!cubit.isLastPage) {
                       cubit.nextPage();
                     } else {
-                      context.go(Routes.signup);
                       cubit.onboardingCompleted();
+                      context.go(Routes.signup);
                     }
                   },
                 );
@@ -83,7 +83,8 @@ class OnboardingView extends StatelessWidget {
             SizedBox(height: AppHeight.s14),
             TextButton(
               onPressed: () {
-                  context.go(Routes.signup);
+                cubit.onboardingCompleted();
+                context.go(Routes.signup);
               },
               child: Text(
                 "Skip",

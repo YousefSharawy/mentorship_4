@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppStorage {
   final SharedPreferences sharedPreferences;
   AppStorage(this.sharedPreferences);
+
   Future<bool> skipOnboarding(bool skipOnboarding) async {
     return await sharedPreferences.setBool("skipOnboarding", skipOnboarding);
   }
@@ -41,5 +42,10 @@ class AppStorage {
 
   List<String> getRecentKeywords() {
     return sharedPreferences.getStringList("recentKeywords") ?? [];
+  }
+
+  Future<void> saveUserCode(String code) => sharedPreferences.setString("userCode", code);
+ String? getUserCode() {
+    return sharedPreferences.getString("userCode");
   }
 }

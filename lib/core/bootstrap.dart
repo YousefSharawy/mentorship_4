@@ -4,15 +4,20 @@ import 'package:mentorship_4/core/cubit/locale_cubit.dart';
 import 'package:mentorship_4/core/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentorship_4/core/injection.dart';
+import 'package:mentorship_4/feature/cart/controller/cubit/cart_cubit.dart';
+
 class Bootstrap extends StatelessWidget {
   const Bootstrap({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<LocaleCubit>()..init(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<LocaleCubit>()..init()),
+        BlocProvider(create: (_) => getIt<CartCubit>()),
+      ],
       child: BlocBuilder<LocaleCubit, String>(
         builder: (context, langCode) {
-        final cubit = context.read<LocaleCubit>();
+          final cubit = context.read<LocaleCubit>();
           return ScreenUtilInit(
             ensureScreenSize: true,
             designSize: const Size(375, 812),

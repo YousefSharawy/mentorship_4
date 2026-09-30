@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/widgets/custom_elevated_button.dart';
+import 'package:mentorship_4/feature/cart/controller/cubit/cart_cubit.dart';
+import 'package:mentorship_4/feature/cart/model/cart_item_model.dart';
 import 'package:mentorship_4/feature/search/model/item_model.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/font_manager.dart';
@@ -115,64 +118,89 @@ class FoodDetailsView extends StatelessWidget {
                   ),
                   color: ColorManager.aliceBlue,
                 ),
-                child: Column(
-                  children: [
-                    Row(
+                child: BlocBuilder<CartCubit, CartState>(
+                  builder: (context, state) {
+                    final count = state.count;
+                    final cubit = context.read<CartCubit>();
+                    return Column(
                       children: [
-                        Text(
-                          "\$${itemModel.itemPrice}",
-                          style: getRegularStyle(
-                            fontFamily: FontConstants.sen,
-                            fontSize: AppHeight.s28,
-                            color: ColorManager.primaryText,
-                          ),
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: .start,
+                              children: [
+                                Text(
+                                  "\$${itemModel.itemPrice}",
+                                  style: getRegularStyle(
+                                    fontFamily: FontConstants.sen,
+                                    fontSize: AppHeight.s28,
+                                    color: ColorManager.primaryText,
+                                  ),
+                                ),
+                                Text(
+                                  "total: \$${itemModel.itemPrice * count}",
+                                  style: getRegularStyle(
+                                    fontFamily: FontConstants.sen,
+                                    fontSize: AppHeight.s16,
+                                    color: ColorManager.primaryText,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Spacer(),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: AppHeight.s12, horizontal: AppWidth.s14),
+                              width: AppWidth.s125,
+                              height: AppHeight.s48,
+                              decoration: BoxDecoration(
+                                color: ColorManager.black,
+                                borderRadius: BorderRadius.circular(AppRadius.s50),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: .spaceBetween,
+                                children: [
+                                  CustomIconButton(
+                                    width: AppWidth.s24,
+                                    height: AppHeight.s24,
+                                    ontap: cubit.itemCountDecrease,
+                                    backgroundColor: ColorManager.primaryText,
+                                    icon: Icon(Icons.remove),
+                                    iconColor: ColorManager.white,
+                                    iconSize: AppSize.s17,
+                                  ),
+                                  Text(
+                                    "${state.count}",
+                                    style: getBoldStyle(
+                                      fontFamily: FontConstants.sen,
+                                      fontSize: FontSize.s16,
+                                      color: ColorManager.white,
+                                    ),
+                                  ),
+                                  CustomIconButton(
+                                    width: AppWidth.s24,
+                                    height: AppHeight.s24,
+                                    ontap: cubit.itemCountIncrease,
+                                    backgroundColor: ColorManager.primaryText,
+                                    icon: Icon(Icons.add),
+                                    iconColor: ColorManager.white,
+                                    iconSize: AppSize.s17,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                         Spacer(),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: AppHeight.s12, horizontal: AppWidth.s14),
-                          width: AppWidth.s125,
-                          height: AppHeight.s48,
-                          decoration: BoxDecoration(
-                            color: ColorManager.black,
-                            borderRadius: BorderRadius.circular(AppRadius.s50),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: .spaceBetween,
-                            children: [
-                              CustomIconButton(
-                                width: AppWidth.s24,
-                                height: AppHeight.s24,
-                                ontap: () {},
-                                backgroundColor: ColorManager.primaryText,
-                                icon: Icon(Icons.remove),
-                                iconColor: ColorManager.white,
-                                iconSize: AppSize.s17,
-                              ),
-                              Text(
-                                "2",
-                                style: getBoldStyle(
-                                  fontFamily: FontConstants.sen,
-                                  fontSize: FontSize.s16,
-                                  color: ColorManager.white,
-                                ),
-                              ),
-                              CustomIconButton(
-                                width: AppWidth.s24,
-                                height: AppHeight.s24,
-                                ontap: () {},
-                                backgroundColor: ColorManager.primaryText,
-                                icon: Icon(Icons.add),
-                                iconColor: ColorManager.white,
-                                iconSize: AppSize.s17,
-                              ),
-                            ],
-                          ),
+                        CustomElevatedButton(
+                          title: "ADD TO CART",
+                          onPress: () {
+                            cubit.cartItems.add(CartItemModel(orderItem: itemModel, quantity: count));
+                            print(cubit.cartItems);
+                          },
                         ),
                       ],
-                    ),
-                    Spacer(),
-                    CustomElevatedButton(title: "ADD TO CART", onPress: () {}),
-                  ],
+                    );
+                  },
                 ),
               ),
             ],

@@ -60,15 +60,16 @@ class AppNavigator {
         builder: (context, state) {
           final args = state.extra as ({int id, String name, String? address, String image});
           return BlocProvider(
-            create: (context)=> getIt<FoodCubit>()..getReturantMenuItemsByID(args.id),
-            child: RestaurantsDetailsView(address: args.address ?? "",id:args.id,image: args.image, name: args.name));
+            create: (context) => getIt<FoodCubit>()..getReturantMenuItemsByID(args.id),
+            child: RestaurantsDetailsView(address: args.address ?? "", id: args.id, image: args.image, name: args.name),
+          );
         },
       ),
       GoRoute(
         path: Routes.foodDetails,
         builder: (context, state) {
           final itemModel = state.extra as ItemModel;
-          return FoodDetailsView(itemModel: itemModel);
+          return  FoodDetailsView(itemModel: itemModel);
         },
       ),
     ],

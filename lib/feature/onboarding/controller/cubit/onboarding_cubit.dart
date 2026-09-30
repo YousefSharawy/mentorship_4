@@ -22,7 +22,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   ];
   bool get isLastPage => state.currentPage == onboardingPages.length-1;
   void nextPage() {
-    if(isLastPage)return;
+    if(isLastPage){
+      return;}
     pageController.nextPage(duration: Duration(microseconds: 300), curve: Curves.easeInOut);
   }
   void onPageChanged (int index) {

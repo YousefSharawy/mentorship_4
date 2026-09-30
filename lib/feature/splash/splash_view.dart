@@ -31,7 +31,7 @@ class _SplashViewState extends State<SplashView> {
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
      if (_hasSkippedOnboarding && _stayLoggedIn) {
-      getIt<AuthCubit>().getUserName();
+      getIt<AuthCubit>().getUser();
       context.go(Routes.home);
     }
     else if (_hasSkippedOnboarding) {
