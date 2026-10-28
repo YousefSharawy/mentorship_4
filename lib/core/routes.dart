@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:mentorship_4/core/injection.dart';
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/auth/signup/view/signup_view.dart';
+import 'package:mentorship_4/feature/cart/view/cart_view.dart';
 import 'package:mentorship_4/feature/detials/food/controller/cubit/food_cubit.dart';
-import 'package:mentorship_4/feature/detials/food/presentation/view/food_details_view.dart';
+import 'package:mentorship_4/feature/detials/food/view/food_details_view.dart';
 import 'package:mentorship_4/feature/detials/resturant/restaurants_details_view.dart';
 import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart';
 import 'package:mentorship_4/feature/home/view/home_view.dart';
@@ -22,6 +23,7 @@ class Routes {
   static const String signup = '/signup';
   static const String foodDetails = '/foodDetails';
   static const String restaurantDetails = '/restaurantDetails';
+  static const String cartView = '/cartView';
 }
 
 class AppNavigator {
@@ -69,7 +71,13 @@ class AppNavigator {
         path: Routes.foodDetails,
         builder: (context, state) {
           final itemModel = state.extra as ItemModel;
-          return  FoodDetailsView(itemModel: itemModel);
+          return FoodDetailsView(itemModel: itemModel);
+        },
+      ),
+      GoRoute(
+        path: Routes.cartView,
+        builder: (context, state) {
+          return CartView();
         },
       ),
     ],

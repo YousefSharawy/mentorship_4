@@ -7,10 +7,10 @@ import 'package:mentorship_4/core/widgets/custom_elevated_button.dart';
 import 'package:mentorship_4/feature/cart/controller/cubit/cart_cubit.dart';
 import 'package:mentorship_4/feature/cart/model/cart_item_model.dart';
 import 'package:mentorship_4/feature/search/model/item_model.dart';
-import '../../../../../core/resources/color_manager.dart';
-import '../../../../../core/resources/font_manager.dart';
-import '../../../../../core/resources/typography_manager.dart';
-import '../../../../../core/widgets/custom_icon_button.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/font_manager.dart';
+import '../../../../core/resources/typography_manager.dart';
+import '../../../../core/widgets/custom_icon_button.dart';
 
 class FoodDetailsView extends StatelessWidget {
   const FoodDetailsView({super.key, required this.itemModel});
@@ -194,8 +194,7 @@ class FoodDetailsView extends StatelessWidget {
                         CustomElevatedButton(
                           title: "ADD TO CART",
                           onPress: () {
-                            cubit.cartItems.add(CartItemModel(orderItem: itemModel, quantity: count));
-                            print(cubit.cartItems);
+                            cubit.addItemToCart(CartItemModel(orderItem: itemModel, quantity: count));
                           },
                         ),
                       ],

@@ -12,6 +12,7 @@ class ColorManager {
   static const gray = Color(0xffECF0F4);
   static const lightGray = Color(0xffF6F6F6);
     static const error = Color(0xffE53935);
+    static const success = Color(0xff059C6A);
 
 
 }
