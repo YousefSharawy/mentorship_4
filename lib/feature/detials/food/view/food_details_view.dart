@@ -6,6 +6,7 @@ import 'package:mentorship_4/core/resources/spacing_values_manager.dart';
 import 'package:mentorship_4/core/widgets/custom_elevated_button.dart';
 import 'package:mentorship_4/feature/cart/controller/cubit/cart_cubit.dart';
 import 'package:mentorship_4/feature/cart/model/cart_item_model.dart';
+import 'package:mentorship_4/feature/detials/food/controller/cubit/counter_cubit.dart';
 import 'package:mentorship_4/feature/search/model/item_model.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
@@ -87,7 +88,6 @@ class FoodDetailsView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: AppHeight.s4),
-
                 Text(
                   itemModel.itemName,
                   style: getBoldStyle(fontFamily: FontConstants.sen, fontSize: FontSize.s20),
@@ -156,36 +156,41 @@ class FoodDetailsView extends StatelessWidget {
                                 color: ColorManager.black,
                                 borderRadius: BorderRadius.circular(AppRadius.s50),
                               ),
-                              child: Row(
-                                mainAxisAlignment: .spaceBetween,
-                                children: [
-                                  CustomIconButton(
-                                    width: AppWidth.s24,
-                                    height: AppHeight.s24,
-                                    ontap: cubit.itemCountDecrease,
-                                    backgroundColor: ColorManager.primaryText,
-                                    icon: Icon(Icons.remove),
-                                    iconColor: ColorManager.white,
-                                    iconSize: AppSize.s17,
-                                  ),
-                                  Text(
-                                    "${state.count}",
-                                    style: getBoldStyle(
-                                      fontFamily: FontConstants.sen,
-                                      fontSize: FontSize.s16,
-                                      color: ColorManager.white,
-                                    ),
-                                  ),
-                                  CustomIconButton(
-                                    width: AppWidth.s24,
-                                    height: AppHeight.s24,
-                                    ontap: cubit.itemCountIncrease,
-                                    backgroundColor: ColorManager.primaryText,
-                                    icon: Icon(Icons.add),
-                                    iconColor: ColorManager.white,
-                                    iconSize: AppSize.s17,
-                                  ),
-                                ],
+                              child: BlocBuilder<CounterCubit, int>(
+                                builder: (context, state) {
+                                  final cubit = context.read<CounterCubit>();
+                                  return Row(
+                                    mainAxisAlignment: .spaceBetween,
+                                    children: [
+                                      CustomIconButton(
+                                        width: AppWidth.s24,
+                                        height: AppHeight.s24,
+                                        ontap: cubit.itemCountDecrease,
+                                        backgroundColor: ColorManager.primaryText,
+                                        icon: Icon(Icons.remove),
+                                        iconColor: ColorManager.white,
+                                        iconSize: AppSize.s17,
+                                      ),
+                                      Text(
+                                        "$state",
+                                        style: getBoldStyle(
+                                          fontFamily: FontConstants.sen,
+                                          fontSize: FontSize.s16,
+                                          color: ColorManager.white,
+                                        ),
+                                      ),
+                                      CustomIconButton(
+                                        width: AppWidth.s24,
+                                        height: AppHeight.s24,
+                                        ontap: cubit.itemCountIncrease,
+                                        backgroundColor: ColorManager.primaryText,
+                                        icon: Icon(Icons.add),
+                                        iconColor: ColorManager.white,
+                                        iconSize: AppSize.s17,
+                                      ),
+                                    ],
+                                  );
+                                },
                               ),
                             ),
                           ],
@@ -194,7 +199,7 @@ class FoodDetailsView extends StatelessWidget {
                         CustomElevatedButton(
                           title: "ADD TO CART",
                           onPress: () {
-                            cubit.addItemToCart(CartItemModel(orderItem: itemModel, quantity: count));
+                            cubit.addItemToCart(CartItemModel(orderItem: itemModel, quantity:context.read<CounterCubit>().state));
                           },
                         ),
                       ],

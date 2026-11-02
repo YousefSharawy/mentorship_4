@@ -35,64 +35,68 @@ class CartView extends StatelessWidget {
           final cart = context.read<CartCubit>();
           return Column(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppWidth.s24),
-                child: Column(
-                  children: [
-                    SizedBox(height: AppHeight.s50),
-                    Row(
-                      children: [
-                        CustomIconButton(
-                          ontap: () {
-                            context.pop();
-                          },
-                          backgroundColor: ColorManager.gray,
-                        ),
-                        SizedBox(width: AppWidth.s16),
-                        Text(
-                          "Cart",
-                          style: getRegularStyle(
-                            fontSize: FontSize.s17,
-                            color: ColorManager.primaryText,
-                            fontFamily: FontConstants.sen,
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppWidth.s24),
+                  child: Column(
+                    children: [
+                      SizedBox(height: AppHeight.s50),
+                      Row(
+                        children: [
+                          CustomIconButton(
+                            ontap: () {
+                              context.pop();
+                            },
+                            backgroundColor: ColorManager.gray,
                           ),
-                        ),
-                        Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            cart.toggleEditCartMode();
-                          },
-                          child: Text(
-                            isEditMode ? "Done" : "EDIT ITEMS",
+                          SizedBox(width: AppWidth.s16),
+                          Text(
+                            "Cart",
                             style: getRegularStyle(
-                              fontSize: FontSize.s14,
+                              fontSize: FontSize.s17,
+                              color: ColorManager.primaryText,
                               fontFamily: FontConstants.sen,
-                              color: isEditMode ? ColorManager.success : ColorManager.primary,
-                            ).copyWith(decoration: isEditMode ? TextDecoration.none : TextDecoration.underline),
+                            ),
                           ),
+                          Spacer(),
+                          TextButton(
+                            onPressed: () {
+                              cart.toggleEditCartMode();
+                            },
+                            child: Text(
+                              isEditMode ? "Done" : "EDIT ITEMS",
+                              style: getRegularStyle(
+                                fontSize: FontSize.s14,
+                                fontFamily: FontConstants.sen,
+                                color: isEditMode ? ColorManager.success : ColorManager.primary,
+                              ).copyWith(decoration: isEditMode ? TextDecoration.none : TextDecoration.underline),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: AppHeight.s35),
+                      Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          itemBuilder: (_, index) {
+                            return CustomCartContainer(
+                              isEditMode: isEditMode,
+                              onDecrement: (quantity) => cart.updateQuantity(index, quantity),
+                              onIncrement: (quantity) => cart.updateQuantity(index, quantity),
+                              onCartItemDelete: () => cart.deleteOrderItemFromCart(state.cartItems[index].orderItem.itemID),
+                              cartItemModel: state.cartItems[index],
+                            );
+                          },
+                          itemCount: state.cartItems.length,
                         ),
-                      ],
-                    ),
-                    SizedBox(height: AppHeight.s35),
-                    ListView.builder(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      itemBuilder: (_, index) {
-                        return CustomCartContainer(
-                          isEditMode: isEditMode,
-                          onDecrement: (quantity) => cart.updateQuantity(index, quantity),
-                          onIncrement: (quantity) => cart.updateQuantity(index, quantity),
-                          onCartItemDelete: () => cart.deleteOrderItemFromCart(state.cartItems[index].orderItem.itemID),
-                          cartItemModel: state.cartItems[index],
-                        );
-                      },
-                      itemCount: state.cartItems.length,
-                    ),
-                    SizedBox(height: AppHeight.s10),
-                  ],
+                      ),
+                      SizedBox(height: AppHeight.s10),
+                    ],
+                  ),
                 ),
               ),
-              Spacer(),
+              // Spacer(),
               Container(
                 width: 1.sw,
                 height: AppHeight.s310,

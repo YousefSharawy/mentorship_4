@@ -4,9 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:mentorship_4/core/netwrok/api_services.dart';
 import 'package:mentorship_4/core/storage/app_storage.dart';
 import 'package:mentorship_4/feature/cart/model/cart_item_model.dart';
-
 import 'package:mentorship_4/feature/cart/model/order_item_model.dart';
-import 'package:mentorship_4/feature/search/model/item_model.dart';
 
 part 'cart_state.dart';
 part 'cart_cubit.freezed.dart';

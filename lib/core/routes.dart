@@ -5,6 +5,7 @@ import 'package:mentorship_4/core/injection.dart';
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart';
 import 'package:mentorship_4/feature/auth/signup/view/signup_view.dart';
 import 'package:mentorship_4/feature/cart/view/cart_view.dart';
+import 'package:mentorship_4/feature/detials/food/controller/cubit/counter_cubit.dart';
 import 'package:mentorship_4/feature/detials/food/controller/cubit/food_cubit.dart';
 import 'package:mentorship_4/feature/detials/food/view/food_details_view.dart';
 import 'package:mentorship_4/feature/detials/resturant/restaurants_details_view.dart';
@@ -12,9 +13,13 @@ import 'package:mentorship_4/feature/home/controller/cubit/home_cubit.dart';
 import 'package:mentorship_4/feature/home/view/home_view.dart';
 import 'package:mentorship_4/feature/onboarding/view/onboarding_view.dart';
 import 'package:mentorship_4/feature/onboarding/controller/cubit/onboarding_cubit.dart';
+import 'package:mentorship_4/feature/orders-history/order_history_view.dart';
+import 'package:mentorship_4/feature/profile/profile_view.dart';
 import 'package:mentorship_4/feature/search/controller/cubit/search_cubit.dart';
 import 'package:mentorship_4/feature/search/model/item_model.dart';
 import 'package:mentorship_4/feature/splash/splash_view.dart';
+
+import '../feature/addresses/address_view.dart';
 
 class Routes {
   static const String splash = '/splash';
@@ -24,6 +29,9 @@ class Routes {
   static const String foodDetails = '/foodDetails';
   static const String restaurantDetails = '/restaurantDetails';
   static const String cartView = '/cartView';
+  static const String profile = '/profile';
+  static const String orderHistory = '/ordersHistory';
+  static const String address = '/address';
 }
 
 class AppNavigator {
@@ -57,6 +65,9 @@ class AppNavigator {
         path: Routes.signup,
         builder: (context, state) => BlocProvider(create: (context) => getIt<AuthCubit>(), child: SignupView()),
       ),
+      GoRoute(path: Routes.profile, builder: (context, state) => ProfileView()),
+      GoRoute(path: Routes.orderHistory, builder: (context, state) => OrderHistoryView()),
+      GoRoute(path: Routes.address, builder: (context, state) => AddressView()),
       GoRoute(
         path: Routes.restaurantDetails,
         builder: (context, state) {
@@ -71,7 +82,10 @@ class AppNavigator {
         path: Routes.foodDetails,
         builder: (context, state) {
           final itemModel = state.extra as ItemModel;
-          return FoodDetailsView(itemModel: itemModel);
+          return BlocProvider(
+            create: (context) => CounterCubit(),
+            child: FoodDetailsView(itemModel: itemModel),
+          );
         },
       ),
       GoRoute(

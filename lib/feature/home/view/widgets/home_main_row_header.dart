@@ -16,7 +16,9 @@ class HomeMainRowHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomIconButton(icon: Icon(Icons.menu), ontap: () {}, backgroundColor: ColorManager.gray),
+        CustomIconButton(icon: Icon(Icons.menu), ontap: () {
+          Scaffold.of(context).openDrawer();
+        }, backgroundColor: ColorManager.gray),
         SizedBox(width: AppWidth.s18),
         Column(
           crossAxisAlignment: .start,
