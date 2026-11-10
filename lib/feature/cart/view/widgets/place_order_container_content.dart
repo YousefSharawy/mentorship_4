@@ -73,16 +73,7 @@ class _PlaceOrderContainerContentState extends State<PlaceOrderContainerContent>
           CustomTextFormField(controller: textEditingController,
           readOnly: !isEditing,
           ),
-          // Container(
-          //   height: AppHeight.s62,
-          //   width: 1.sw,
-          //   padding: EdgeInsets.all(22),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.all(Radius.circular(AppRadius.s12)),
-          //     color: ColorManager.aliceBlue,
-          //   ),
-          //   child: Text("2118 Thornridge Cir. Syracuse"),
-          // ),
+          
           SizedBox(height: AppHeight.s30),
           Row(
             children: [
