@@ -199,7 +199,9 @@ class FoodDetailsView extends StatelessWidget {
                         CustomElevatedButton(
                           title: "ADD TO CART",
                           onPress: () {
-                            cubit.addItemToCart(CartItemModel(orderItem: itemModel, quantity:context.read<CounterCubit>().state));
+                            cubit.addItemToCart(
+                              CartItemModel(orderItem: itemModel, quantity: context.read<CounterCubit>().state),
+                            );
                           },
                         ),
                       ],

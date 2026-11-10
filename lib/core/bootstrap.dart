@@ -4,6 +4,7 @@ import 'package:mentorship_4/core/cubit/locale_cubit.dart';
 import 'package:mentorship_4/core/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mentorship_4/core/injection.dart';
+import 'package:mentorship_4/feature/addresses/model/controller/cubit/address_cubit.dart';
 import 'package:mentorship_4/feature/cart/controller/cubit/cart_cubit.dart';
 
 class Bootstrap extends StatelessWidget {
@@ -14,6 +15,7 @@ class Bootstrap extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<LocaleCubit>()..init()),
         BlocProvider(create: (_) => getIt<CartCubit>()),
+        BlocProvider(create: (_) => getIt<AddressCubit>()),
       ],
       child: BlocBuilder<LocaleCubit, String>(
         builder: (context, langCode) {

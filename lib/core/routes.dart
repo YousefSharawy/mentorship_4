@@ -19,7 +19,7 @@ import 'package:mentorship_4/feature/search/controller/cubit/search_cubit.dart';
 import 'package:mentorship_4/feature/search/model/item_model.dart';
 import 'package:mentorship_4/feature/splash/splash_view.dart';
 
-import '../feature/addresses/address_view.dart';
+import '../feature/addresses/presentation/view/address_view.dart';
 
 class Routes {
   static const String splash = '/splash';

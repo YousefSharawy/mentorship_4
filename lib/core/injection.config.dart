@@ -17,6 +17,8 @@ import 'package:mentorship_4/core/netwrok/api_services.dart' as _i42;
 import 'package:mentorship_4/core/netwrok/dio_service.dart' as _i134;
 import 'package:mentorship_4/core/storage/app_storage.dart' as _i719;
 import 'package:mentorship_4/core/storage/storage_module.dart' as _i302;
+import 'package:mentorship_4/feature/addresses/model/controller/cubit/address_cubit.dart'
+    as _i778;
 import 'package:mentorship_4/feature/auth/signup/controller/cubit/auth_cubit.dart'
     as _i685;
 import 'package:mentorship_4/feature/cart/controller/cubit/cart_cubit.dart'
@@ -43,6 +45,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => storageModule.prefs,
       preResolve: true,
     );
+    gh.factory<_i778.AddressCubit>(() => _i778.AddressCubit());
     gh.singleton<_i929.LocaleCubit>(() => _i929.LocaleCubit());
     gh.singleton<_i134.DioService>(() => _i134.DioService());
     gh.factory<_i719.AppStorage>(
